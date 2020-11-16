@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Chat</title>
+    </head>
+    <body>
+		<h1>Welcome to your chat account</h1>
+        <table>
+		<tr>
+		<th style="text-align:left">Username: <td>{{user.username}}
+		<tr>
+		<th style="text-align:left">Nickname:  <td>{{user.account.nickname}}
+		</table>
+
+        <form action='logout/' method="POST">
+			{% csrf_token %}
+            <input type="submit" value="Logout"/>
+        </form>
+
+        <h3>Chat with your friends</h3>
+
+        <form id='chat' action='sendMessage/' method="POST">
+            {% csrf_token %}
+            <span>To:</span><br/>
+            <select name="receiver">
+                {% for user in users %}
+                <option value="{{user.username}}">{{user.username}}</option>
+                {% endfor %}
+            </select><br/>
+            <span>Message:</span><br/>
+            <input type="text" name="content"/><br/>
+            <input type="submit" value="Send"/>
+        </form>
+        <br/>
+
+        <h3>Sent chat messages</h3>
+        <ul>
+            {% for sentChat in chatsSent %}
+            <li>{{sentChat.content}} (to {{sentChat.receiver}})</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Received chat messages</h3>
+        <ul>
+            {% for receivedChat in chatsReceived %}
+            <li>{{receivedChat.content}} (from {{receivedChat.sender}})</li>
+            {% endfor %}
+        </ul>
+
+
+
+
+    </body>
+</html>
