@@ -70,6 +70,8 @@
             {{message.receiver}}
         </td>
         <td>
+        </td>
+        <td>
             <form action='deleteMessage/' method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{message.id}}"/>

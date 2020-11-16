@@ -10,6 +10,6 @@ class Account(models.Model):
 
 class Message(models.Model):
 	sender =  models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender_name')
-	receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver_name')
+	receiver = models.TextField()
 	content = models.TextField()
 
