@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from .models import Account, Message
 
+
+@csrf_exempt
 @transaction.atomic
 @login_required
 def sendMessageView(request):
