@@ -52,13 +52,13 @@
 <br/>
 <h3>Chat...</h3>
 <table>
-    {% for message in messages %}
     <tr>
         <th>Message</th>
         <th>Sender</th>
         <th>Receiver</th>
         <th>Delete</th>
     </tr>
+    {% for message in messages %}
     <tr>
         <td>
             {{message.content}}

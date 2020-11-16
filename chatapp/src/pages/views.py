@@ -10,7 +10,7 @@ from .models import Account, Message
 @login_required
 def deleteView(request):
     m = Message.objects.get(pk=request.POST.get('id'))
-    print('message: ', m)
+    m.delete()   # FLAW 2
     return redirect('/')
 
 
@@ -37,4 +37,4 @@ def homePageView(request):
     messages = Message.objects.all()
     print('messages: ', messages)
     accounts = Account.objects.exclude(user_id=request.user.id)
-    return render(request, 'pages/index.html', {'accounts': accounts, 'users': users, 'messages': messages,})
+    return render(request, 'pages/index.html', {'accounts': accounts, 'users': users, 'messages': messages, })
