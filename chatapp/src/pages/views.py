@@ -7,6 +7,13 @@ from django.db import transaction
 from .models import Account, Message
 
 
+@login_required
+def deleteView(request):
+    m = Message.objects.get(pk=request.POST.get('id'))
+    print('message: ', m)
+    return redirect('/')
+
+
 @csrf_exempt
 @transaction.atomic
 @login_required
@@ -26,10 +33,8 @@ def homePageView(request):
     print('wuhuuu  ')
     user = User.objects.get(username=request.user)
     users = User.objects.filter(is_staff=False).exclude(username=user.username)
-    chatsSent = Message.objects.filter(sender=user)
-    print('sent: ', chatsSent)
     print('users: ', users)
-    chatsReceived = Message.objects.filter(receiver=user)
+    messages = Message.objects.all()
+    print('messages: ', messages)
     accounts = Account.objects.exclude(user_id=request.user.id)
-    return render(request, 'pages/index.html', {'accounts': accounts, 'users': users, 'chatsSent': chatsSent,
-                                                'chatsReceived': chatsReceived})
+    return render(request, 'pages/index.html', {'accounts': accounts, 'users': users, 'messages': messages,})
